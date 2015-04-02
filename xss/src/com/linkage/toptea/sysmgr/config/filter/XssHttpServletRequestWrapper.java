@@ -1,4 +1,4 @@
-package filter;
+package com.linkage.toptea.sysmgr.config.filter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
