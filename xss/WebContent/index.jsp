@@ -8,7 +8,7 @@
 </head>
 <body>
 <form action="XssServlet">
-	<textarea rows="" cols=""  name="testarea">
+	<textarea rows="10" cols="10"  name="testarea">
 	
 	</textarea>	
 	<input type="submit"  value="提交 ">
