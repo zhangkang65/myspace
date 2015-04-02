@@ -24,8 +24,9 @@ public class XssServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("---------------servlte  is  ok-------------"
-	+"<".getBytes().length+":"+"£¼".getBytes().length);
+	System.out.println(request.getParameter("testarea"));
+		
+		
 	}
 
 	/**
