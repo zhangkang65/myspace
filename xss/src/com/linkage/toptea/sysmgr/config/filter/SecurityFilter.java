@@ -53,7 +53,8 @@ public class SecurityFilter implements Filter {
 				if(queryStr.indexOf("url") != -1){
 					return true;
 				}
-				if (queryStr.indexOf(value) != -1 || queryStr.indexOf(mvalue) != -1) {
+				System.out.println("------queryStr-----------"+queryStr);
+				if (queryStr.toUpperCase().indexOf(value) != -1 || queryStr.toUpperCase().indexOf(mvalue) != -1||queryStr.toUpperCase().indexOf("<SCRIPT") != -1 ||queryStr.toUpperCase().indexOf("%3C/SCRIPT") != -1) {
 					System.out.println("已过滤一个危险入侵，参数queryStr:"+queryStr);
 					System.out.println("value:"+value);
 					System.out.println("mvalue"+mvalue);
@@ -82,7 +83,8 @@ public class SecurityFilter implements Filter {
 					if(param.indexOf("url") != -1){
 						return true;
 					}
-					if (param.indexOf(value) != -1 || param.indexOf(mvalue) != -1) {
+					System.out.println("------param-----------"+param);
+					if (param.toUpperCase().indexOf(value) != -1 || param.toUpperCase().indexOf(mvalue) != -1||param.toUpperCase().indexOf("<SCRIPT") != -1 ||param.toUpperCase().indexOf("%3C/SCRIPT") != -1) {
 						System.out.println("已过滤一个表单入侵，参数param:"+param);
 						System.out.println("value:"+value);
 						System.out.println("mvalue:"+mvalue);
@@ -116,10 +118,9 @@ public class SecurityFilter implements Filter {
 			}
 			// 添加
 			String queryStr = httpRequest.getQueryString();
-//			System.out.println("queryStr:"+queryStr);
+			System.out.println(queryStr+"----------------------");
 			// 链接 过滤
 			if (queryStr!=null && !"".equals(queryStr)) {
-				System.out.println("--------------------queryStr:"+queryStr+"-----------------");
 				// 未做FUNCID过滤
 				if (!doSafeCheck(queryStr, "", request)) {
 					httpResponse.sendRedirect(redirectPath);

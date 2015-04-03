@@ -15,13 +15,12 @@ public class XssFilter implements  Filter{
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	@Override
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response,FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest  req=(HttpServletRequest) request; //包装增强
 		
 		//循环便利出结果 
@@ -33,7 +32,7 @@ public class XssFilter implements  Filter{
 
 	@Override
 	public void init(FilterConfig config) throws ServletException {
-		System.out.println("---------filter---------------");
+		System.out.println("--filter---");
 		
 	}
 

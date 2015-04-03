@@ -51,22 +51,24 @@ public class RemoveScriptXssHttpServletRequestWrapper extends HttpServletRequest
 		if (s == null || s.isEmpty()) {
 			return s;
 		}
+		
 		StringBuilder sb = new StringBuilder(s.length() + 16);
-		int  beginIndex=s.indexOf("<script");  //开始标识
-		if(beginIndex!=-1){  //有这个标签
-			
-			
-			int   endIndex=s.indexOf("</script");
-			
-			if(beginIndex==-1){  //如果只有单项<script>标签  不构成威胁  
+		
+		//开始标识
+		int  beginflag=s.indexOf("<script");  
+		//有script标签
+		if(beginflag!=-1){  
+			//有</script标签
+			int   endflag=s.indexOf("</script");
+			 //如果只有单项<script>标签  不构成威胁  
+			if(endflag==-1){ 
 				sb.append(s);
 			}else{
-				 //获取script的开始标签的长度 
-				//TODO
+				//int  endflagend 
+				
+				
 				
 			}
-			
-			
 			
 			//s.substring(beginIndex, endIndex)
 		}else{  //不存在标签 
