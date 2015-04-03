@@ -32,7 +32,7 @@ public class XssFilter implements  Filter{
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws ServletException {
+	public void init(FilterConfig config) throws ServletException {
 		System.out.println("---------filter---------------");
 		
 	}

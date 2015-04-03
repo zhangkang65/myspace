@@ -83,12 +83,15 @@ public class SecurityFilter implements  Filter{
 	    return true;
 	  }
 
+	  
+	  
 	  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 	  {
 	    try {
 	      initSafeFilter(request);
 	      HttpServletRequest httpRequest = (HttpServletRequest)request;
 	      HttpServletResponse httpResponse = (HttpServletResponse)response;
+	      //如果不是忽略的字符 
 	      if (!this.ignoreEncoding) {
 	        String encoding = this.encoding;
 	        boolean flag = false;
@@ -108,7 +111,9 @@ public class SecurityFilter implements  Filter{
 
 	      if ((queryStr != null) && (!"".equals(queryStr))) {
 	        System.out.println("--------------------queryStr:" + queryStr + "-----------------");
-
+	        
+	        
+	        //如果请求参数中 包含危险字符   跳转页面到提示页面  
 	        if (!doSafeCheck(queryStr, "", request)) {
 	          httpResponse.sendRedirect(this.redirectPath);
 	          System.out.println("已过滤从" + request.getRemoteAddr() + "的一个危险入侵！");
@@ -117,9 +122,9 @@ public class SecurityFilter implements  Filter{
 	        }
 
 	      }
-
-	      if ((this.formCheck.equals("1")) && 
-	        (!doFormCheck(httpRequest))) {
+	      
+	      //如果需要 fromCheck 
+	      if (   (this.formCheck.equals("1"))   &&   (!doFormCheck(httpRequest))   ) {
 	        System.out.println("已过滤从" + request.getRemoteAddr() + "的一个表单入侵！");
 	        httpResponse.sendRedirect(this.redirectPath);
 	        return;
@@ -173,8 +178,8 @@ public class SecurityFilter implements  Filter{
 
 	  public static void main(String[] args) {
 	    SecurityFilter filter = new SecurityFilter();
-	    String queryString = "service=http%3A%2F%2Fbomc.ah.amcc%2Fcas%2Fauc%2FtoPortal.jsp&thirdPortalUser=FJfnlv9Tv4PLMs%2Fd%2Fvh%2FABymN%2Bb9wp%2F52sjJhu7c59%2F91rPH";
-	    System.out.println(filter.doSafeCheck(queryString, "", null));
+	    String queryString = "service=http%3A%2F%2Fbom.ah.amcc%2Fcas%2Fauc%2FtoPortal.jsp&thirdPortalUser=FJfnlv9Tv4PLMs%2Fd%2Fvh%2FABymN%2Bb9wp%2F52sjJhu7c59%2F91rPH";
+	    filter.doSafeCheck(queryString, "", null);
 	  }
 	
 }
