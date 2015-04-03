@@ -19,7 +19,7 @@
 		</init-param>
 		<init-param>
 			<param-name>redirectPath</param-name>
-			<param-value>/sysmgr/404.htm</param-value>
+			<param-value>/xss/404.htm</param-value>
 		</init-param>
 		<init-param>
 			<param-name>ignoreEncoding</param-name>

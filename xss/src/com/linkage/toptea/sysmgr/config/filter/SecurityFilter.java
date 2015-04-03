@@ -190,7 +190,7 @@ public class SecurityFilter implements Filter {
 	
 	public static void main (String[] args) {
 		SecurityFilter filter = new SecurityFilter();
-		String queryString ="service=http%3A%2F%2Fbomc.ah.amcc%2Fcas%2Fauc%2FtoPortal.jsp&thirdPortalUser=FJfnlv9Tv4PLMs%2Fd%2Fvh%2FABymN%2Bb9wp%2F52sjJhu7c59%2F91rPH";
+		String queryString ="service=http%3A%2F%2Fbom.ah.amcc%2Fcas%2Fauc%2FtoPortal.jsp&thirdPortalUser=FJfnlv9Tv4PLMs%2Fd%2Fvh%2FABymN%2Bb9wp%2F52sjJhu7c59%2F91rPH";
 		System.out.println(filter.doSafeCheck(queryString, "", null));
 	}
 }
