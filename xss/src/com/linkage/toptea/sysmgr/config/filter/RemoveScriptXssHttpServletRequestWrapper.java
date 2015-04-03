@@ -3,11 +3,11 @@ package com.linkage.toptea.sysmgr.config.filter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
-public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
+public class RemoveScriptXssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
 	HttpServletRequest orgRequest = null;
 
-	public XssHttpServletRequestWrapper(HttpServletRequest request) {
+	public RemoveScriptXssHttpServletRequestWrapper(HttpServletRequest request) {
 		super(request);
 		orgRequest = request;
 	}
@@ -19,7 +19,7 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 	 */
 	@Override
 	public String getParameter(String name) {
-		String value = super.getParameter(xssEncode(name));
+		String value = super.getParameter(name);
 		if (value != null) {
 			value = xssEncode(value);
 		}
@@ -52,35 +52,28 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 			return s;
 		}
 		StringBuilder sb = new StringBuilder(s.length() + 16);
-		for (int i = 0; i < s.length(); i++) {
-			char c = s.charAt(i);
-			switch (c) {
-			case '>':
-				sb.append('＞');// 全角大于号
-				break;
-			case '<':
-				sb.append('＜');// 全角小于号
-				break;
-			case '\'':
-				sb.append('‘');// 全角单引号
-				break;
-			case '\"':
-				sb.append('“');// 全角双引号
-				break;
-			case '&':
-				sb.append('＆');// 全角
-				break;
-			case '\\':
-				sb.append('＼');// 全角斜线
-				break;
-			case '#':
-				sb.append('＃');// 全角井号
-				break;
-			default:
-				sb.append(c);
-				break;
+		int  beginIndex=s.indexOf("<script");  //开始标识
+		if(beginIndex!=-1){  //有这个标签
+			
+			
+			int   endIndex=s.indexOf("</script");
+			
+			if(beginIndex==-1){  //如果只有单项<script>标签  不构成威胁  
+				sb.append(s);
+			}else{
+				 //获取script的开始标签的长度 
+				//TODO
+				
 			}
+			
+			
+			
+			//s.substring(beginIndex, endIndex)
+		}else{  //不存在标签 
+			sb.append(s);
 		}
+		
+		
 		return sb.toString();
 	}
 
@@ -99,8 +92,8 @@ public class XssHttpServletRequestWrapper extends HttpServletRequestWrapper {
 	 * @return
 	 */
 	public static HttpServletRequest getOrgRequest(HttpServletRequest req) {
-		if (req instanceof XssHttpServletRequestWrapper) {
-			return ((XssHttpServletRequestWrapper) req).getOrgRequest();
+		if (req instanceof RemoveScriptXssHttpServletRequestWrapper) {
+			return ((RemoveScriptXssHttpServletRequestWrapper) req).getOrgRequest();
 		}
 
 		return req;

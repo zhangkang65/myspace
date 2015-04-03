@@ -25,7 +25,7 @@ public class XssFilter implements  Filter{
 		HttpServletRequest  req=(HttpServletRequest) request; //包装增强
 		
 		//循环便利出结果 
-		XssHttpServletRequestWrapper xssRequest = new XssHttpServletRequestWrapper(req); 
+		RemoveScriptXssHttpServletRequestWrapper xssRequest = new RemoveScriptXssHttpServletRequestWrapper(req); 
 		//处理请求  
 		chain.doFilter(xssRequest, response);
 		
