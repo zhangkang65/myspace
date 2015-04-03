@@ -11,7 +11,7 @@
   </welcome-file-list>
   <filter>
     <filter-name>xssFilter</filter-name>
-    <filter-class>filter.XssFilter</filter-class>
+    <filter-class>com.linkage.toptea.sysmgr.config.filter.XssFilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>xssFilter</filter-name>

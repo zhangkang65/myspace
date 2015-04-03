@@ -9,7 +9,7 @@
 <body>
 <form action="XssServlet">
 	xss字符校验：
-	<textarea rows="10" cols="10"  name="testarea">
+	<textarea rows="10" cols="10"  name="a">
 	
 	</textarea>	
 	<input type="submit"  value="提交 ">
