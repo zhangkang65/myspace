@@ -3,10 +3,14 @@
     <openFlag>1</openFlag>
     <formCheck>0</formCheck>
 	<securityBeanList>
-		
 	  <SecurityBean>
 	    	<value><![CDATA[</SCRIPT]]></value>
 	    	<mvalue>%3CSCRIPT</mvalue>
+	    </SecurityBean>
+	  
+	  <SecurityBean>
+	    	<value>%3C/SCRIPT</value>
+	    	<mvalue>%3C/SCRIPT</mvalue>
 	    </SecurityBean>
 	  
 	  <SecurityBean>

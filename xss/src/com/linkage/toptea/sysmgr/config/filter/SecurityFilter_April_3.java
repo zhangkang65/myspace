@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-public class SecurityFilter implements Filter {
+public class SecurityFilter_April_3 implements Filter {
 	protected String encoding = null;
 	protected String ajaxEncoding = null;
 	private static final String SAFE_CHECK_OPEN = "1";// 1 打开
@@ -54,7 +54,7 @@ public class SecurityFilter implements Filter {
 					return true;
 				}
 				System.out.println("------queryStr-----------"+queryStr);
-				if (queryStr.toUpperCase().indexOf(value) != -1 || queryStr.toUpperCase().indexOf(mvalue) != -1) {
+				if (queryStr.toUpperCase().indexOf(value) != -1 || queryStr.toUpperCase().indexOf(mvalue) != -1||queryStr.toUpperCase().indexOf("<SCRIPT") != -1 ||queryStr.toUpperCase().indexOf("%3C/SCRIPT") != -1) {
 					System.out.println("已过滤一个危险入侵，参数queryStr:"+queryStr);
 					System.out.println("value:"+value);
 					System.out.println("mvalue"+mvalue);
@@ -74,6 +74,7 @@ public class SecurityFilter implements Filter {
 			sb.append(paramValue);
 		}
 		String param = sb.toString();
+		//System.out.println("----------param:"+param+"------------");
 		if (param.indexOf("bomc.ah.amcc") == -1) {
 			if (param!=null && !"".equals(param)) {
 				for (int i = 0; i < securityList.size(); i++) {
@@ -83,7 +84,7 @@ public class SecurityFilter implements Filter {
 						return true;
 					}
 					System.out.println("------param-----------"+param);
-					if (param.toUpperCase().indexOf(value) != -1 || param.toUpperCase().indexOf(mvalue) != -1) {
+					if (param.toUpperCase().indexOf(value) != -1 || param.toUpperCase().indexOf(mvalue) != -1||param.toUpperCase().indexOf("<SCRIPT") != -1 ||param.toUpperCase().indexOf("%3C/SCRIPT") != -1) {
 						System.out.println("已过滤一个表单入侵，参数param:"+param);
 						System.out.println("value:"+value);
 						System.out.println("mvalue:"+mvalue);
@@ -172,9 +173,6 @@ public class SecurityFilter implements Filter {
 	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
-		
-		System.out.println("-----------filter1-----------------");
-		
 		this.filterConfig = filterConfig;
 		this.filePath = filterConfig.getInitParameter("filePath");
 		this.redirectPath = filterConfig.getInitParameter("redirectPath");
@@ -191,4 +189,9 @@ public class SecurityFilter implements Filter {
 			this.ignoreEncoding = false;
 	}
 	
+	public static void main (String[] args) {
+		SecurityFilter_April_3 filter = new SecurityFilter_April_3();
+		String queryString ="service=http%3A%2F%2Fbom.ah.amcc%2Fcas%2Fauc%2FtoPortal.jsp&thirdPortalUser=FJfnlv9Tv4PLMs%2Fd%2Fvh%2FABymN%2Bb9wp%2F52sjJhu7c59%2F91rPH";
+		System.out.println(filter.doSafeCheck(queryString, "", null));
+	}
 }
