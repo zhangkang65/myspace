@@ -7,11 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="XssServlet">
-	xss字符校验：
-	<textarea rows="10" cols="10"  name="testarea">
+<form action="XssServlet"  method="get">
+	字符校验1：<input type="text"  name="a"><br>
+	字符校验2：<input type="text"  name="b"><br>
+	字符校验3：<input type="text"  name="c"><br>
 	
-	</textarea>	
 	<input type="submit"  value="提交 ">
 	 <!-- 点击直接提交尝试  -->
 	 输入内容为：<%=request.getAttribute("content1") %>
