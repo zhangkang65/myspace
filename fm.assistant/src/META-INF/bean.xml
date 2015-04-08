@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+  <bean id="callFileManager" class="com.linkage.toptea.sysmgr.fm.assistant.concern.CallFileManager" init-method="init">
+		<property name="callPath"><value>${concern.alarm.callpath}</value></property>
+		<property name="callto"><value>${concern.alarm.callDir}</value></property>
+		<property name="dataSource"><ref bean="dataSource"/></property>
+		<property name="userManager"><ref bean="userManager"/></property>
+  </bean>
+  
+  <bean id="alarmAssistantConfig" class="com.linkage.toptea.sysmgr.fm.assistant.AstConfig" init-method="init">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+		<property name="cm"><ref bean="configManager"/></property>
+  </bean>
+  <bean id="concernManager" class="com.linkage.toptea.sysmgr.fm.assistant.concern.ConcernManagerImpl" init-method="init">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+		<property name="ovsdInteraction"><ref bean="ovsdInteraction"/></property>
+		<property name="alarmManager"><ref bean="alarmManager"/></property>
+		<property name="responsibleManager"><ref bean="responsibleManager"/></property>
+		<property name="userManager"><ref bean="userManager"/></property>
+		<property name="configManager"><ref bean="configManager"/></property>
+		<property name="callPath"><value>${concern.alarm.callpath}</value></property>
+		<property name="callto"><value>${concern.alarm.callDir}</value></property>
+		<property name="callback"><value>${concern.alarm.callbackDir}</value></property>
+		<property name="callTotal"><value>${concern.alarm.callTotal}</value></property>
+		<property name="backTemp"><value>${concern.alarm.backTemp}</value></property>
+		<property name="callFileManager"><ref bean="callFileManager"/></property>
+		<property name="callUserManager"><ref bean="callUserManager"/></property>
+		<property name="businessLogger"> <ref bean="businessLogger"/> </property>
+		<property name="callKeyWordManager"><ref bean="callKeyWordManager"/></property>
+		<property name="callConfigManager"><ref bean="callConfigManager"/></property>
+		<property name="specialCallManager"><ref bean="specialCallManager"/></property>
+  </bean>
+   <bean id="trackManager" class="com.linkage.toptea.sysmgr.fm.assistant.track.TrackManagerImpl" init-method="init">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+  </bean>
+  <bean id="findCallAlarm" class="com.linkage.toptea.sysmgr.fm.assistant.concern.FindCallAlarm">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+  </bean>
+  
+  <bean id="concernExt" class="com.linkage.toptea.sysmgr.fm.assistant.concern.ConcernManagerExt" init-method="init">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+		<property name="eventCenter"><ref bean="topicEventCenter"/></property>
+		<property name="concernManager"><ref bean="concernManager"/></property>
+		<property name="responsibleManager"><ref bean="responsibleManager"/></property>
+		<property name="userManager"><ref bean="userManager"/></property>
+		<property name="callPath"><value>${concern.alarm.callpath}</value></property>
+		<property name="callto"><value>${concern.alarm.callDir}</value></property>
+		<property name="callFileManager"><ref bean="callFileManager"/></property>
+  </bean>
+  
+  
+  <bean id="voiceFindManager" class="com.linkage.toptea.sysmgr.fm.assistant.web.VoiceFindManagerImp">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+		<property name="userManager"><ref bean="userManager"/></property>
+  </bean>
+  
+  <bean id="callUserManager" class="com.linkage.toptea.sysmgr.fm.assistant.calluser.CallUserManager">
+		<property name="responsibleManager"><ref bean="responsibleManager"/></property>
+  </bean>
+   
+  <bean id="phoneFilterManager" class="com.linkage.toptea.sysmgr.fm.assistant.concern.PhoneFilterManager"  init-method="init">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+		<property name="businessLogger"> <ref bean="businessLogger"/> </property>
+  </bean> 
+  
+     
+  <bean id="callKeyWordManager" class="com.linkage.toptea.sysmgr.fm.assistant.callkeyword.CallKeyWordManager"  init-method="init">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+		<property name="businessLogger"> <ref bean="businessLogger"/> </property>
+  </bean> 
+     
+  <bean id="callConfigManager" class="com.linkage.toptea.sysmgr.fm.assistant.callconfig.CallConfigManager"  init-method="init">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+		<property name="businessLogger"> <ref bean="businessLogger"/> </property>
+  </bean>      
+  <bean id="specialCallManager" class="com.linkage.toptea.sysmgr.fm.assistant.specialcall.SpecialCallManager"  init-method="init">
+		<property name="dataSource"><ref bean="dataSource"/></property>
+		<property name="configManager"><ref bean="configManager"/></property>
+		<property name="businessLogger"> <ref bean="businessLogger"/> </property>
+  </bean> 
+</beans>
+
+

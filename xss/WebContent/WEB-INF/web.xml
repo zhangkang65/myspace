@@ -12,11 +12,6 @@
 
 	<filter>
 		<filter-name>SecurityFilter</filter-name>
-		
-		<!--
-		<filter-class>com.linkage.toptea.sysmgr.config.filter.XssFilter</filter-class>
-		 -->
-		 
 		<filter-class>com.linkage.toptea.sysmgr.config.filter.SecurityFilter</filter-class> 
 		<init-param>
 			<param-name>filePath</param-name>
@@ -26,18 +21,13 @@
 			<param-name>redirectPath</param-name>
 			<param-value>/xss/404.htm</param-value>
 		</init-param>
-		<init-param>
-			<param-name>ignoreEncoding</param-name>
-			<param-value>false</param-value>
-		</init-param>
-		
-		 
-		 
 	</filter>
 	<filter-mapping>
 		<filter-name>SecurityFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+ 
+
 
 	<servlet>
 		<description></description>

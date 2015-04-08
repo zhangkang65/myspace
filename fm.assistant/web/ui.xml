@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!--DOCTYPE ui SYSTEM "../../../../../conf/ui.dtd"-->
+<ui>
+    <extension  point="com.linkage.toptea.sysmgr.webframe">
+         <view id="concernAlarm" name="关注告警" location="default/main" icon="/images/icons/alarmGradeMap.gif" priority="20">
+            <getURL><![CDATA[
+                if(targets.length > 0) {
+                  if (targets[0].type=='Root')
+                     return "/fm/assistant/concernAlarm.jsp";
+                  else
+                     return "/fm/assistant/concernAlarm.jsp?path="+targets[0].path;
+                }
+                return "";
+            ]]></getURL>
+        </view>
+        <view id="ignoreAlarm" name="忽略告警" location="default/main" icon="/images/icons/disable_b.gif" priority="100">
+            <getURL><![CDATA[
+                if(targets.length > 0) {
+                
+                   if (targets[0].type=="mo"&&targets[0].stat==4)
+                      return "/fm/assistant/ignoreAlarm.jsp?path="+targets[0].path;
+                   else
+                      return "";
+                }
+                return "";
+            ]]></getURL>
+        </view>
+        <action id="concernConfig" name="配置"  toolbarPath="basic" location="concernAlarm" icon="/images/icons/config.gif"  priority="20" >
+            <getURL><![CDATA[
+                 return "javascript:selectionService.getViewWindow('concernAlarm').showConfig()";
+            ]]></getURL>
+        </action>
+        <action id="addConcernAlarm" name="加入关注"  popmenuPath="basic" location="alarmTable" icon="/images/empty.gif"  priority="20" >
+            <getURL><![CDATA[
+              if(targets.length > 0 && targets[0].type == 'alarm')
+                 return "javascript:openModalDialog('/fm/assistant/addConcernAlarmForm.jsp?alarmId="+ targets[0].id + "',350,280,null)";
+              else
+                 return "";
+            ]]></getURL>
+        </action>
+    </extension>
+</ui>

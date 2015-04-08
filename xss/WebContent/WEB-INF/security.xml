@@ -1,22 +1,16 @@
 <?xml version="1.0"?>
 <Security>
     <openFlag>1</openFlag>
-    <formCheck>0</formCheck>
 	<securityBeanList>
-	  <SecurityBean>
-	    	<value><![CDATA[</SCRIPT]]></value>
-	    	<mvalue>%3CSCRIPT</mvalue>
+	  	<SecurityBean>
+	    	<value><![CDATA[<]]></value>
+	    	<mvalue>%3C</mvalue>
 	    </SecurityBean>
-	  
-	  <SecurityBean>
-	    	<value>%3C/SCRIPT</value>
-	    	<mvalue>%3C/SCRIPT</mvalue>
+	    
+		<SecurityBean>
+	    	<value><![CDATA[>]]></value>
+	    	<mvalue>%3E</mvalue>
 	    </SecurityBean>
-	  
-	  <SecurityBean>
-	    	<value><![CDATA[</SCRIPT]]></value>
-	    	<mvalue>%3C%2FSCRIPT</mvalue>
-	    </SecurityBean>
-	  
+	     
 	</securityBeanList>
 </Security>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="GBK"?>
+<project name="deploy" basedir="." default="deploy">
+<target name="N10004" description="sm-fm.assistant.jar">
+		<echo>build jar</echo>
+		<mkdir dir="build" />
+		<jar destfile="build/sm-fm.assistant.jar">
+			<zipfileset dir="bin/com/linkage/toptea/sysmgr/fm/assistant" prefix="com/linkage/toptea/sysmgr/fm/assistant" />
+			<zipfileset dir="bin/META-INF" prefix="META-INF" />
+			<zipfileset dir="src/com" prefix="src/com" />
+		</jar>
+	</target>
+	<target name="deploy" depends="N10004" >
+		<echo>copy jar</echo>
+	
+		<copy todir="D:\\tomcat_toptea\\webapps\\sysmgr\\WEB-INF\\lib\\">
+			<fileset dir="build">
+				<include name="**" />
+			</fileset>
+		</copy>
+
+	</target>
+	
+</project>

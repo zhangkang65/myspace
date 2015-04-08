@@ -33,7 +33,6 @@ public class CopyXssHttpServletRequestWrapper extends HttpServletRequestWrapper 
 	 */
 	@Override
 	public String getHeader(String name) {
-
 		String value = super.getHeader(xssEncode(name));
 		if (value != null) {
 			value = xssEncode(value);

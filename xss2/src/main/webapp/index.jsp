@@ -10,14 +10,16 @@
 <script type="text/javascript">
 Ext.onReady(function(){
 	document.forms[0].btn.onclick=function(){
-		var  fromVal=document.forms[0].myname.value;
+		var  iname=document.forms[0].iname.value;
+		var  uname=document.forms[0].uname.value;
+		var  hename=document.forms[0].hename.value;
+		
 		
 		Ext.Ajax.request({
 			   url: 'XssServlet',
-			   params: {myname:fromVal},
+			   params: {iname:iname,uname:uname,hename:hename},
 			   success: function(resp,opts){
 				 var  reText=resp.responseText;
-				 document.getElementById("myDiv").innerHTML=reText;
 			   }
 			});
 	};
@@ -30,7 +32,9 @@ Ext.onReady(function(){
 
 
 	<form action="XssServlet" method="get">
-		<input type="text" name="myname" ><br />
+		<input type="text" name="iname" ><br />
+		<input type="text" name="uname" ><br />
+		<input type="text" name="hename" ><br />
 		 <input type="button" name="btn" onclick="" value="submit">
 	</form>
 	
@@ -38,7 +42,7 @@ Ext.onReady(function(){
 	<!--  
 	<script type="text/javascript">alert("hello")</script>
 	-->
-	
+	<input  onclick="alert('hello')"  value="submit">
 	
 	</div>
 </body>

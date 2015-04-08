@@ -24,11 +24,10 @@ public class XssServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	System.out.println(request.getParameter("a")+"----------------------------");
-
-		
+	String  b=request.getParameter("b");
+	request.setAttribute("b", b);
+	request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
