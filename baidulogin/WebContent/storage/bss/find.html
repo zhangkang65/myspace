@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Baidu Frontia Sample</title>
+
+  <!-- 在这里引入 frontia -->
+  <script src="../../common/frontia/Baidu-Frontia-JS-1.0.0.js"></script>
+</head>
+<body>
+<pre id='some-msg'></pre>
+<script>
+  /**
+   * @param {baidu.frontia} fronta
+   * @param {baidu.frontia.Role} Role
+   * @param {baidu.frontia.storage} storage
+   * @param {baidu.frontia.storage.Query} Query
+   */
+  (function (frontia, Role, storage, Query) {
+    var msgEl = document.getElementById('some-msg');
+
+    var AK = 'iG2ffdkYaq8kIjrSfvjMcUrf';
+    // 初始化 frontia
+    frontia.init(AK);
+
+    // 创建一种角色
+    var role = new Role('role_name');
+
+    // 设置当前执行环境的角色
+    frontia.setCurrentAccount(role);
+
+    // 创建一个查询语句
+    var query = new Query();
+    query.on('demo.Hello').equal('World!');
+
+    storage.findData(query, {
+      // 查询成功的回调
+      success: function(response) {
+        var docs = response.result || [];
+        msgEl.innerHTML = JSON.stringify(docs);
+
+      },
+      // 查询失败的回调
+      error: function() {
+        msgEl.innerHTML = '查找失败';
+      }
+    })
+
+
+  }(baidu.frontia, baidu.frontia.Role, baidu.frontia.storage, baidu.frontia.storage.Query));
+</script>
+</body>
+</html>

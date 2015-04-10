@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Baidu Frontia Sample</title>
+
+  <!-- 在这里引入 frontia -->
+  <script src="../../common/frontia/Baidu-Frontia-JS-1.0.0.js"></script>
+</head>
+<body>
+<pre id='some-msg'></pre>
+<script>
+  /**
+   * @param {baidu.frontia} fronta
+   * @param {baidu.frontia.ACL} ACL
+   * @param {baidu.frontia.Role} Role
+   * @param {baidu.frontia.storage} storage
+   * @param {baidu.frontia.Data} Data
+   * @param {baidu.frontia.storage.Query} Data
+   */
+  (function (frontia, ACL, Role, storage, Data, Query) {
+    var msgEl = document.getElementById('some-msg');
+
+    var AK = 'iG2ffdkYaq8kIjrSfvjMcUrf';
+    // 初始化 frontia
+    frontia.init(AK);
+
+    // 创建一种角色
+    var role = new Role('role_name');
+
+    // 设置当前执行环境的角色
+    frontia.setCurrentAccount(role);
+
+    // 创建一组权限
+    var acl = new ACL();
+
+    // 为前面创建的角色设置权限
+    acl.setReadAccess(role, true);
+    acl.setWriteAccess(role, true);
+
+
+    // 更新的规则
+    var update = {
+      '$set' : {
+        "demo.Hello": 'World!(edit)',
+        "mtime": Date.now()
+      }
+    };
+
+    // 标准化文档为 Frontia.Data
+    var data = new Data(update);
+    data.setAcl(acl);
+
+    // 查找的语句
+    var query = new Query();
+    query.on('demo.Hello').equal('World!');
+
+    storage.updateData(query, data, {
+      // 插入成功的回调
+      success: function(response) {
+        console.log(arguments);
+        var count = response.response_params.count || 0;
+        msgEl.innerHTML = '成功更新了 ' + count + ' 条记录';
+      },
+      // 插入失败的回调
+      error: function() {
+        msgEl.innerHTML = '更新失败';
+      }
+    })
+
+
+  }(baidu.frontia, baidu.frontia.ACL, baidu.frontia.Role, baidu.frontia.storage, baidu.frontia.Data, baidu.frontia.storage.Query));
+</script>
+</body>
+</html>

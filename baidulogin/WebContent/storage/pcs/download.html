@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Baidu Frontia Sample</title>
+
+  <!-- 在这里引入 frontia -->
+  <script src="../../common/frontia/Baidu-Frontia-JS-1.0.0.js"></script>
+</head>
+<body>
+<div id="not-login">
+  <p>
+    <button id="login">登录</button>
+  </p>
+</div>
+<div id="has-login">
+  <pre id='some-msg'></pre>
+</div>
+<script>
+  /**
+   * @param {baidu.frontia} fronta
+   * @param {baidu.frontia.User} User
+   * @param {baidu.frontia.Role} Role
+   * @param {baidu.frontia.personalStorage} personalStorage
+   */
+  (function (frontia, User, Role, personalStorage) {
+    var msgEl = document.getElementById('some-msg');
+
+    var AK = 'iG2ffdkYaq8kIjrSfvjMcUrf';
+    // 初始化 frontia
+    frontia.init(AK);
+
+    // 使用用户数据需要用户登录
+    // 在应用管理页面下的 社会化服务 - 基础设置中设置该地址
+    var redirect_url = 'http://frontiajsdemo.duapp.com/social/baidu.html';
+
+    var user;
+
+    // 获取当前用户
+    user = frontia.getCurrentAccount();
+
+    // 设置登录成功后的回调
+    frontia.social.setLoginCallback({
+      success: function (user) {
+        console.log(user);
+        console.log('登录成功')
+      },
+      error: function (error) {
+        console.log('error');
+        console.log(error)
+      }
+    });
+
+    // 检查用户是否登录
+    if (!user || user.getType() !== 'user' || user.getMediaType() !== 'baidu') {
+
+      // 尚未登录，隐藏上传按钮
+      document.getElementById('has-login').style.display = 'none';
+
+      // 点击登录按钮去登录
+      document.getElementById('login').onclick = function () {
+
+        // 初始化登录的配置
+        var options = {
+          response_type: 'token',
+          media_type: 'baidu',  // 登录百度帐号
+          redirect_uri: redirect_url,
+          client_type: 'web',
+          scope: 'netdisk'
+        };
+
+        // 登录
+        frontia.social.login(options);
+
+      };
+      return;
+    }
+
+    // 隐藏登录按钮
+    document.getElementById('not-login').style.display = 'none';
+
+    // 设置需要列文件的目录
+    var PCSroot = '/apps/FrontiaDevDemo';
+
+    // 调用接口
+    personalStorage.listFile(PCSroot, {
+      // 只列出前 5 个文件
+      limit: '0-5',
+
+      // 列取文件成功
+      success: function (response) {
+        console.log('success', arguments);
+
+        var p = document.createElement('p');
+        p.innerHTML = '列取文件成功';
+        msgEl.appendChild(p);
+
+        var fileList = response.list || [];
+        if(fileList.length === 0) {
+          p = document.createElement('p');
+          p.innerHTML = '服务器上没有文件，先上传一个吧';
+          msgEl.appendChild(p);
+
+          return;
+        }
+
+        // 获取列表中第一个文件的下载地址
+        personalStorage.getFileUrl(fileList[0].path, {
+          // 获取地址成功
+          success : function(response) {
+            p = document.createElement('p');
+            p.innerHTML = '下载地址是 <pre><code>' + response + '</code></pre>';
+            msgEl.appendChild(p);
+          },
+
+          // 出错了 Orz
+          error: function() {
+            console.log('error', arguments);
+          }
+        });
+      },
+
+      // 出错了 Orz
+      error: function () {
+        console.log('error', arguments);
+      }
+    });
+
+
+  }(baidu.frontia, baidu.frontia.User, baidu.frontia.Role, baidu.frontia.personalStorage));
+</script>
+</body>
+</html>

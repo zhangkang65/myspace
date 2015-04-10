@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Baidu Frontia Sample</title>
+
+  <!-- 在这里引入 frontia -->
+  <script src="../../common/frontia/Baidu-Frontia-JS-1.0.0.js"></script>
+</head>
+<body>
+<pre id='some-msg'></pre>
+<script>
+  /**
+   * @param {baidu.frontia} fronta
+   * @param {baidu.frontia.Push} Push
+   */
+  (function (frontia, Push) {
+    var msgEl = document.getElementById('some-msg');
+
+    var AK = 'iG2ffdkYaq8kIjrSfvjMcUrf';
+    // 初始化 frontia
+    frontia.init(AK);
+
+    var options = {
+      push_type: 3, // 推送给所有人
+      message_type: 0,  // 普通消息类型
+      success: function(result) {
+        console.log(arguments);
+        msgEl.innerHTML = '消息发送成功';
+      },
+      error: function(error) {
+        console.log(arguments);
+        msgEl.innerHTML = '消息发送失败（错误码=' + error.code + ')';
+      }
+    };
+
+    var data = {
+      messages: "hello frontia single messages", // 消息内容
+      msg_keys: "a" // 消息标识
+    };
+
+    // 发送消息
+    Push.send(data, options);
+
+  }(baidu.frontia, baidu.frontia.Push));
+</script>
+</body>
+</html>

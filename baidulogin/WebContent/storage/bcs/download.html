@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Baidu Frontia Sample</title>
+
+  <!-- 在这里引入 frontia -->
+  <script src="../../common/frontia/Baidu-Frontia-JS-1.0.0.js"></script>
+</head>
+<body>
+  <pre id='some-msg'></pre>
+<script>
+  /**
+   * @param {baidu.frontia} fronta
+   * @param {baidu.frontia.Role} Role
+   * @param {baidu.frontia.storage} storage
+   */
+  (function (frontia, Role, storage) {
+    var msgEl = document.getElementById('some-msg');
+
+    var AK = 'iG2ffdkYaq8kIjrSfvjMcUrf';
+    // 初始化 frontia
+    frontia.init(AK);
+
+    // 创建一种角色，后续上传的文件对该角色有对应读写权限
+    var role = new Role('role_name');
+
+    // 设置当前状态下的身份，以通过接口的身份校验
+    frontia.setCurrentAccount(role);
+
+    // 列取根目录下的所有文件
+    storage.listFile('/', {
+
+      // 获取列表成功
+      success: function(response) {
+        var fileList = response.result || [];
+        if(fileList.length === 0) {
+          msgEl.innerHTML = '服务器上没有文件，你可以先去上传一个。';
+          return ;
+        }
+
+        // 获取列表里面第一个文件
+        var filename = fileList[0].detail.object;
+
+        var p = document.createElement('p');
+        p.innerHTML = '获取 ' + filename + ' 的下载地址。';
+        msgEl.appendChild(p);
+
+
+        // 根据 路径和文件名 查找该文件的下载地址
+        storage.getFileUrl(filename, {
+          success: function(response){
+            var url = ((response || {}).response_params || {}).url || '';
+
+            var p = document.createElement('p');
+            p.innerHTML = '文件下载地址是<br><pre><code>' + url + '</code></pre>';
+            msgEl.appendChild(p);
+          },
+          error: function() {
+            console.log(arguments);
+          }
+        })
+
+      },
+      // 获取列表失败
+      error: function() {
+        msgEl.innerHTML = '出错了，获取列表失败';
+      }
+    });
+
+  }(baidu.frontia, baidu.frontia.Role, baidu.frontia.storage));
+</script>
+</body>
+</html>

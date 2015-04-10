@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Baidu Frontia Sample</title>
+
+  <!-- 在这里引入 frontia -->
+  <script src="../../common/frontia/Baidu-Frontia-JS-1.0.0.js"></script>
+</head>
+<body>
+<pre id='some-msg'></pre>
+<script>
+  /**
+   * @param {baidu.frontia} fronta
+   * @param {baidu.frontia.ACL} ACL
+   * @param {baidu.frontia.Role} Role
+   * @param {baidu.frontia.storage} storage
+   * @param {baidu.frontia.Data} Data
+   */
+  (function (frontia, ACL, Role, storage, Data) {
+    var msgEl = document.getElementById('some-msg');
+
+    var AK = 'iG2ffdkYaq8kIjrSfvjMcUrf';
+    // 初始化 frontia
+    frontia.init(AK);
+
+    // 创建一种角色
+    var role = new Role('role_name');
+
+    // 设置当前执行环境的角色
+    frontia.setCurrentAccount(role);
+
+    // 创建一组权限
+    var acl = new ACL();
+
+    // 为前面创建的角色设置权限
+    acl.setReadAccess(role, true);
+    acl.setWriteAccess(role, true);
+
+
+    // 要插入的数据内容
+    var docs = {
+      demo :{
+        "Hello": 'World!',
+        "Now": Date.now()
+      }
+    };
+
+    // 将数据标准化，转换成 Frontia.Data 对象。
+    var data = new Data(docs);
+
+    // 对这组数据进行授权操作，确保数据不会被权限外的人访问到
+    data.setAcl(acl);
+
+    // 将这段数据插入
+    storage.insertData(data, {
+      // 插入成功的回调
+      success: function(result) {
+        console.log(arguments);
+        msgEl.innerHTML = '插入成功';
+      },
+      // 插入失败的回调
+      error: function() {
+        msgEl.innerHTML = '插入失败';
+      }
+    })
+
+
+  }(baidu.frontia, baidu.frontia.ACL, baidu.frontia.Role, baidu.frontia.storage, baidu.frontia.Data));
+</script>
+</body>
+</html>
