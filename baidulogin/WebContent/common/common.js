@@ -15,13 +15,7 @@
 // 生成导航
 (function () {
   "use strict";
-  var navData = {
-    children: [
-      {
-        href: 'social/baidu.html',
-        title: '社会化登录',
-        active: false,
-        children: [
+  var navData = { children: [ {  href: 'social/baidu.html', title: '社会化登录', active: false, children: [
           {
             href: 'social/baidu.html',
             title: '百度',
@@ -59,27 +53,7 @@
             children: []
           }
         ]
-      },
-      /*{
-        href: 'user/index.html',
-        title: '用户(组)权限',
-        active: false,
-        children: [
-          {
-            href: 'user/user.html',
-            title: '用户',
-            active: false,
-            children: []
-          },
-          {
-            href: 'user/role.html',
-            title: '角色（用户组）',
-            active: false,
-            children: []
-          }
-        ]
-      },*/
-      {
+      },{
         href: 'storage/bcs/upload.html',
         title: '应用数据存储',
         active: false,
