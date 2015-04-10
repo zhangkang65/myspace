@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="XssServlet"  method="get">
+<form action="XssServlet"  method="get"  >
 	字符校验1：<input type="text"  name="a"><br>
 	字符校验2：<input type="text"  name="b"><br>
 	字符校验3：<input type="text"  name="c"><br>

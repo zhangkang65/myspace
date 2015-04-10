@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
 public class GenericServletRequestWrapper extends HttpServletRequestWrapper {
 	
 	private HttpServletRequest  orgRequest=null;
-	private boolean hasEncode; 
+	private boolean hasEncode=false; 
 
 	public GenericServletRequestWrapper(HttpServletRequest request) {
 		super(request);
