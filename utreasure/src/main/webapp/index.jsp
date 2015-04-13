@@ -8,10 +8,9 @@
 <body>
 <fieldset>
 	<legend>用户数据</legend>
-	<form action="">
-	
-	
-	
+	<form action="user/getInfo.do">
+		<input type="text"  name="userName"><br/>
+		<input type="submit"  value="提交">
 	</form>
 </fieldset>
 
