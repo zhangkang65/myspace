@@ -10,6 +10,9 @@ public class ShUserController {
 	@RequestMapping(value="/getInfo")
 	public void getUserInfo(){
 		System.out.println("-------getinfo---------");
+		
+		//±£¥Ê ˝æ›≤‚ ‘
+		
 	}
 	
 }

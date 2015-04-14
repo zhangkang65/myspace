@@ -1,6 +1,0 @@
-名称：zkk 
-ID：2897520
-API Key：   b91LlDYIMek8EKjsckUZhafG
-Secret Key： 6hDvVSIfvhWetOHEe20ZRtWMQnBn8bZ9 
-创建时间：  2014-06-09 10:38:37
-更新时间：  2015-04-10 12:40:20
