@@ -18,24 +18,23 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 		<!-- 生成模型的包名和位置 -->
-		<javaModelGenerator targetPackage="com.goodnn.model"
-			targetProject="print">
+		<javaModelGenerator targetPackage="com.zkk.utreasure.entity" targetProject="utreasure">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 		<!-- 生成的映射文件包名和位置 -->
-		<sqlMapGenerator targetPackage="com.goodnn.mapping"
-			targetProject="print">
+		<sqlMapGenerator targetPackage="com.zkk.utreasure.mapping"
+			targetProject="utreasure">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<!-- 生成DAO的包名和位置 -->
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.goodnn.dao" targetProject="print">
+			targetPackage="com.zkk.utreasure.dao" targetProject="utreasure">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		<!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
 			
-		<table tableName="tprint_type" domainObjectName="PrintType"
+		<table tableName="utr_user" domainObjectName="ShUser"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false" />
