@@ -8,12 +8,16 @@
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
 		<!-- 数据库链接URL、用户名、密码 -->
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+		<!--	
+			<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/sy" userId="root"
 			password="taijia">
-			<!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@localhost:1521:orcl" 
-				userId="msa" password="msa"> -->
+			-->
+			<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@localhost:1521:orcl" 
+				userId="msa" password="msa"> 
+				
 		</jdbcConnection>
+		
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
