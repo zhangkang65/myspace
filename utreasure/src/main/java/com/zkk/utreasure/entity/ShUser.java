@@ -2,108 +2,107 @@ package com.zkk.utreasure.entity;
 
 public class ShUser {
 	
-	private  String shid;  //用户标识符
-	private  String  shName;//用户姓名
-	private  String shLoginName;//用户登录名
-	private  String shSex;//用户性别
-	private  String shAge;//用户年龄
-	private  String shPassword;//用户密码
-	private  String shCreateTime;//创建时间
-	private  String shUpdateTime;//更新时间
-	private  String shImage;//头像
-	private  String shAddr;//用户所在地
-	private  String shIdentityCard;//身份证
-	private  String shTelePhone;//电话
-	private  String shEmail;//用户邮箱
-	private  String shType;//用户类型
-	private  String shBat1;//
-	private  String shBat2;//
-	private  String shBat3;//
+	private  String id;  			//用户标识符
+	private  String userName;		//用户姓名
+	private  String loginName;	//用户登录名
+	private  String sex;			//用户性别
+	private  String age;			//用户年龄
+	private  String password;		//用户密码
+	private  String createTime;	//创建时间
+	private  String updateTime;	//更新时间
+	private  String icon;		//头像
+	private  String address;			//用户所在地
+	private  String identityCardId;	//身份证
+	private  String telePhone;	//电话
+	private  String email;		//用户邮箱
+	private  String userType;			//用户类型
+	private  String shBat1;			//
+
 	
 	
-	public String getShid() {
-		return shid;
+	public String getId() {
+		return id;
 	}
-	public void setShid(String shid) {
-		this.shid = shid;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getShName() {
-		return shName;
+	public String getUserName() {
+		return userName;
 	}
-	public void setShName(String shName) {
-		this.shName = shName;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public String getShLoginName() {
-		return shLoginName;
+	public String getLoginName() {
+		return loginName;
 	}
-	public void setShLoginName(String shLoginName) {
-		this.shLoginName = shLoginName;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
-	public String getShSex() {
-		return shSex;
+	public String getSex() {
+		return sex;
 	}
-	public void setShSex(String shSex) {
-		this.shSex = shSex;
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
-	public String getShAge() {
-		return shAge;
+	public String getAge() {
+		return age;
 	}
-	public void setShAge(String shAge) {
-		this.shAge = shAge;
+	public void setAge(String age) {
+		this.age = age;
 	}
-	public String getShPassword() {
-		return shPassword;
+	public String getPassword() {
+		return password;
 	}
-	public void setShPassword(String shPassword) {
-		this.shPassword = shPassword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	public String getShCreateTime() {
-		return shCreateTime;
+	public String getCreateTime() {
+		return createTime;
 	}
-	public void setShCreateTime(String shCreateTime) {
-		this.shCreateTime = shCreateTime;
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
-	public String getShUpdateTime() {
-		return shUpdateTime;
+	public String getUpdateTime() {
+		return updateTime;
 	}
-	public void setShUpdateTime(String shUpdateTime) {
-		this.shUpdateTime = shUpdateTime;
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
-	public String getShImage() {
-		return shImage;
+	public String getIcon() {
+		return icon;
 	}
-	public void setShImage(String shImage) {
-		this.shImage = shImage;
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
-	public String getShAddr() {
-		return shAddr;
+	public String getAddress() {
+		return address;
 	}
-	public void setShAddr(String shAddr) {
-		this.shAddr = shAddr;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	public String getShIdentityCard() {
-		return shIdentityCard;
+	public String getIdentityCardId() {
+		return identityCardId;
 	}
-	public void setShIdentityCard(String shIdentityCard) {
-		this.shIdentityCard = shIdentityCard;
+	public void setIdentityCardId(String identityCardId) {
+		this.identityCardId = identityCardId;
 	}
-	public String getShTelePhone() {
-		return shTelePhone;
+	public String getTelePhone() {
+		return telePhone;
 	}
-	public void setShTelePhone(String shTelePhone) {
-		this.shTelePhone = shTelePhone;
+	public void setTelePhone(String telePhone) {
+		this.telePhone = telePhone;
 	}
-	public String getShEmail() {
-		return shEmail;
+	public String getEmail() {
+		return email;
 	}
-	public void setShEmail(String shEmail) {
-		this.shEmail = shEmail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getShType() {
-		return shType;
+	public String getUserType() {
+		return userType;
 	}
-	public void setShType(String shType) {
-		this.shType = shType;
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 	public String getShBat1() {
 		return shBat1;
@@ -111,19 +110,5 @@ public class ShUser {
 	public void setShBat1(String shBat1) {
 		this.shBat1 = shBat1;
 	}
-	public String getShBat2() {
-		return shBat2;
-	}
-	public void setShBat2(String shBat2) {
-		this.shBat2 = shBat2;
-	}
-	public String getShBat3() {
-		return shBat3;
-	}
-	public void setShBat3(String shBat3) {
-		this.shBat3 = shBat3;
-	}
-	
-	
-
+		
 }
