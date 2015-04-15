@@ -1,9 +1,13 @@
 package com.zkk.utreasure.service;
 
+import com.zkk.utreasure.entity.ShUser;
+
 
 
 public interface ShUserServiceI {
 
-	void addUser(String string, String string2);
+	void RegisterUser(ShUser shUser);
+
+	//void addUser(String string, String string2);
 
 }

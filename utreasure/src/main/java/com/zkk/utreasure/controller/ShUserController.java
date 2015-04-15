@@ -1,13 +1,18 @@
 package com.zkk.utreasure.controller;
 
+import java.util.Date;
+
 import org.apache.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zkk.utreasure.dto.RegisterUser;
 import com.zkk.utreasure.entity.ShUser;
 import com.zkk.utreasure.service.ShUserServiceI;
+import com.zkk.utreasure.utils.UtilCommon;
 
 @Controller
 @RequestMapping("/user")
@@ -33,8 +38,20 @@ public class ShUserController {
 	 * @return
 	 */
 	@RequestMapping(value="/doRegister")
-	public ModelAndView   doRegister(ShUser  shUser){
-		return null;
+	public ModelAndView   doRegister(RegisterUser  registerUser){
+		
+		ShUser  shUser=new ShUser();
+
+		//√‹¬Îº”√‹ 
+		//BeanUtils.copyProperties(registerUser, shUser);
+		shUser.setEmail(registerUser.getEmail());
+		shUser.setLoginName(registerUser.getLoginName());
+		shUser.setPassword(UtilCommon.md5Encryption(registerUser.getPassword()));
+		shUser.setCreateTime(new Date(System.currentTimeMillis()));
+		shUser.setUpdateTime(new Date(System.currentTimeMillis()));
+		//
+		shUserServicei.RegisterUser(shUser);
+		return new ModelAndView("mainPage");
 	}
 	
 	

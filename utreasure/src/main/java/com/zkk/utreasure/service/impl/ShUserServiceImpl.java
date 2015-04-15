@@ -17,9 +17,9 @@ public class ShUserServiceImpl extends  BaseServiceImpl<ShUser> implements ShUse
 	private ShUserMapper shUserMapper;
 
 	
-	
-	public void addUser(String str, String str2) {
-		shUserMapper.insertUser(str,str2);
+
+	public void RegisterUser(ShUser shUser) {
+		shUserMapper.insertSelective(shUser);
 	}
 
 	

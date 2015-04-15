@@ -1,7 +1,9 @@
 package com.zkk.utreasure.dao;
 
+import com.zkk.utreasure.entity.ShUser;
+
 public interface ShUserMapper {
 
-	void insertUser(String id, String name);
+	void insertSelective(ShUser shUser);
 
 }
