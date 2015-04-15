@@ -2,6 +2,9 @@ package com.zkk.utreasure.controller;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +41,7 @@ public class ShUserController {
 	 * @return
 	 */
 	@RequestMapping(value="/doRegister")
-	public ModelAndView   doRegister(RegisterUser  registerUser){
+	public ModelAndView   doRegister(RegisterUser  registerUser,HttpSession  session){
 		
 		ShUser  shUser=new ShUser();
 
@@ -50,11 +53,20 @@ public class ShUserController {
 		shUser.setCreateTime(new Date(System.currentTimeMillis()));
 		shUser.setUpdateTime(new Date(System.currentTimeMillis()));
 		//
-		shUserServicei.RegisterUser(shUser);
+		int count=shUserServicei.RegisterUser(shUser);
+		
+		//获取用户信息
+		//System.out.println("the count is:"+count+",getid is:"+shUser.getId());
+		
+		
+		//跳转到登陆页面 
 		return new ModelAndView("mainPage");
 	}
 	
-	
-	
+	@RequestMapping(value="/getUserName")
+	public ModelAndView getUserName(HttpServletRequest  request) {
+		
+		return new ModelAndView();
+	}
 	
 }

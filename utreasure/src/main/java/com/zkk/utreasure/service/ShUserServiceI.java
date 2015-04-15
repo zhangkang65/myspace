@@ -6,8 +6,6 @@ import com.zkk.utreasure.entity.ShUser;
 
 public interface ShUserServiceI {
 
-	void RegisterUser(ShUser shUser);
-
-	//void addUser(String string, String string2);
-
+	int RegisterUser(ShUser shUser);
+	
 }

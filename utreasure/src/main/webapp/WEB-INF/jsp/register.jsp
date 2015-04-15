@@ -34,11 +34,25 @@ function registerInfo(){
 	    }else{
 	    	return  false;
 	    }       
-	
-	
-	
-	
 }
+
+   
+//ajax 
+$(function(){
+	$("#user_profile_name").bind("blur", function(){
+		var _this=$(this);
+		if(_this.val()){   //如果存在值
+			$.ajax({
+				   type: "POST",
+				   url: "user/getUserName.do",
+				   data:"loginName="+_this.val(),
+				   success: function(msg){
+				     alert( "Data Saved: " + msg );
+				   }
+				});
+			}
+		});
+})
 </script>
 <style type="text/css">
 
@@ -58,6 +72,9 @@ function registerInfo(){
 						<dd>
 							<input id="user_profile_name" name="loginName" size="30" type="text" />
 						</dd>
+						<dd>
+							<span  id="user_profile_tip"></span>
+						</dd>
 					</dl>
 					<dl class="form">
 						<dt>
@@ -65,6 +82,9 @@ function registerInfo(){
 						</dt>
 						<dd>
 							<input id="user_profile_email" name="email" size="30" type="email" />
+						</dd>
+						<dd>
+							<span  id="user_profile_email"></span>
 						</dd>
 					</dl>
 					<dl class="form">
