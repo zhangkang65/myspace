@@ -48,7 +48,18 @@ $(function(){
 				   data:"loginName="+_this.val(),
 				   success: function(msg){
 					  var  Otip=$("#user_profile_tip"); 
-					  Otip.html(msg);   //填写里面的内容  
+					  var oDiv= document.createElement('span');
+					  if(eval(msg)){
+						 oDiv.innerHTML ='此账号可以正常使用 ';
+						 oDiv.className="normalTip";
+						 $(".btn-primary").attr("disabled",false);  //开启按钮提交  
+					  }else{
+						 oDiv.innerHTML ='对不起，此账号已经存在';
+						 oDiv.className="warnTip";
+						$(".btn-primary").attr("disabled",true);
+						/// oLay.style.display = "block";
+					  }
+					  Otip.html(oDiv);
 				   }
 				});
 			}
@@ -56,7 +67,14 @@ $(function(){
 })
 </script>
 <style type="text/css">
+.warnTip{
+color: red;
+}
 
+
+.normalTip{
+color:blue;
+}
 
 </style>
 </head>
@@ -73,8 +91,7 @@ $(function(){
 						<dd>
 							<input id="user_profile_name" name="loginName" size="30" type="text" />
 						</dd>
-						<dd>
-							<span  id="user_profile_tip"></span>
+						<dd id="user_profile_tip">
 						</dd>
 					</dl>
 					<dl class="form">
@@ -105,13 +122,11 @@ $(function(){
 						</dd>
 					</dl>
 					<p>
-						<button type="submit" class="btn btn-primary">确认注册</button>
+						<button type="submit" class="btn-primary" >确认注册</button>
 					</p>
 				</div>
 			</form>
 		</div>
 	</div>
-
-
 </body>
 </html>

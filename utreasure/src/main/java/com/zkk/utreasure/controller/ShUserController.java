@@ -55,13 +55,16 @@ public class ShUserController {
 		shUser.setPassword(UtilCommon.md5Encryption(registerUser.getPassword()));
 		shUser.setCreateTime(new Date(System.currentTimeMillis()));
 		shUser.setUpdateTime(new Date(System.currentTimeMillis()));
-		//
-		int count=shUserServicei.RegisterUser(shUser);
+		
+		//异常如违反了主键唯一性条件等
+		try {
+			int count=shUserServicei.RegisterUser(shUser);
+		} catch (Exception e) {
+			log.error("doRegister",e);
+		}
 		
 		//获取用户信息
 		//System.out.println("the count is:"+count+",getid is:"+shUser.getId());
-		
-		
 		//跳转到登陆页面 
 		return new ModelAndView("mainPage");
 	}
@@ -83,5 +86,9 @@ public class ShUserController {
 		else  flag=false;	
 		writer.println(flag);	
 	}
+	
+	
+	
+	
 	
 }
