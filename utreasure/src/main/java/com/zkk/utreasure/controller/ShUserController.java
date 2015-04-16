@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,13 +59,15 @@ public class ShUserController {
 		shUser.setPassword(UtilCommon.md5Encryption(registerUser.getPassword()));
 		shUser.setCreateTime(new Date(System.currentTimeMillis()));
 		shUser.setUpdateTime(new Date(System.currentTimeMillis()));
-		
-		//发送邮件到制定邮箱，激活信息
-		
-		
+	
 		//异常如违反了主键唯一性条件等
 		try {
 			int count=shUserServicei.RegisterUser(shUser);
+			if(count!=0){ //注册成功 发送邮件 
+				//SendEmailThread
+				Thread  thread=new Thread(new SendEmailThread("zhangkang65@qq.com",session));
+				thread.start();	
+			}
 		} catch (Exception e) {
 			log.error("doRegister",e);
 		}
@@ -78,6 +79,28 @@ public class ShUserController {
 	}
 	
 	
+	
+	/**
+	 * 内部类发送邮件的线程 
+	 * @author Administrator
+	 *
+	 */
+	class  SendEmailThread  implements  Runnable{
+		private  String  email;
+		private  HttpSession  session;
+		//无参构造
+		public SendEmailThread() {}
+
+		public SendEmailThread(String email, HttpSession session) {
+			this.email=email;
+			this.session=session;
+		}
+
+		public void run() {
+			boolean  isSend=shUserServicei.sendEmail(email,session);
+		}
+		
+	}
 	
 	/**
 	 * 获取用户名是否存在
@@ -96,9 +119,4 @@ public class ShUserController {
 		else  flag=false;	
 		writer.println(flag);	
 	}
-	
-	
-	
-	
-	
 }
