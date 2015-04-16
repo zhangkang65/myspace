@@ -30,24 +30,29 @@ public class ShUserController {
 	@Autowired
 	private  ShUserServiceI  shUserServicei;
 
+	
+	
 	/**
 	 * 跳转到注册界面
 	 * @return
+	 * @since  2015-4-16 15:44:25
 	 */
 	@RequestMapping(value="/toRegister")
 	public ModelAndView toRegister(){
 		return new ModelAndView("register");
 	}
 	
+	
+	
 	/**
 	 * 注册界面
 	 * @return
+	 * @since  2015-4-16 15:44:09
 	 */
 	@RequestMapping(value="/doRegister")
 	public ModelAndView   doRegister(RegisterUser  registerUser,HttpSession  session){
-		
+		//创建对象  接受参数
 		ShUser  shUser=new ShUser();
-
 		//密码加密 
 		//BeanUtils.copyProperties(registerUser, shUser);
 		shUser.setEmail(registerUser.getEmail());
@@ -55,6 +60,9 @@ public class ShUserController {
 		shUser.setPassword(UtilCommon.md5Encryption(registerUser.getPassword()));
 		shUser.setCreateTime(new Date(System.currentTimeMillis()));
 		shUser.setUpdateTime(new Date(System.currentTimeMillis()));
+		
+		//发送邮件到制定邮箱，激活信息
+		
 		
 		//异常如违反了主键唯一性条件等
 		try {
@@ -68,6 +76,8 @@ public class ShUserController {
 		//跳转到登陆页面 
 		return new ModelAndView("mainPage");
 	}
+	
+	
 	
 	/**
 	 * 获取用户名是否存在

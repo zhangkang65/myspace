@@ -67,5 +67,9 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/spring-web-3.2.0.M1.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/spring-webmvc-3.2.0.M1.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mail.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mailapi.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/pop3.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/smtp.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
