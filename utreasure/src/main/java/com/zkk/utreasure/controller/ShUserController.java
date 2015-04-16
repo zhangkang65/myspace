@@ -1,8 +1,11 @@
 package com.zkk.utreasure.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -63,10 +66,22 @@ public class ShUserController {
 		return new ModelAndView("mainPage");
 	}
 	
+	/**
+	 * 获取用户名是否存在
+	 * @param request
+	 * @return
+	 * @throws IOException 
+	 */
 	@RequestMapping(value="/getUserName")
-	public ModelAndView getUserName(HttpServletRequest  request) {
-		
-		return new ModelAndView();
+	public void getUserName(HttpServletRequest  request,HttpServletResponse  response) throws IOException {
+		boolean  flag=false;
+		PrintWriter  writer=response.getWriter();
+		String loginName=request.getParameter("loginName");
+		ShUser  shUser=shUserServicei.validateRepeatName("loginName",loginName);
+		//对象输出
+		if(shUser==null) flag=true;
+		else  flag=false;	
+		writer.println(flag);	
 	}
 	
 }

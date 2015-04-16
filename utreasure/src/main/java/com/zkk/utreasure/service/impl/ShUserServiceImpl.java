@@ -2,6 +2,9 @@ package com.zkk.utreasure.service.impl;
 
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,18 @@ public class ShUserServiceImpl extends  BaseServiceImpl<ShUser> implements ShUse
 
 	public int RegisterUser(ShUser shUser) {
 		return shUserMapper.insertSelective(shUser);
+	}
+
+
+
+	public ShUser validateRepeatName(String fieldName,String fieldValue) {
+		//使用map封装对象的值
+		Map   paramMap =new HashMap<String,String>();
+		paramMap.put("fieldName", fieldName);
+		paramMap.put("fieldValue", fieldValue);
+		
+		//根据字段名，自动获取对象
+		return shUserMapper.getByName(paramMap);
 	}
 
 	

@@ -47,7 +47,8 @@ $(function(){
 				   url: "user/getUserName.do",
 				   data:"loginName="+_this.val(),
 				   success: function(msg){
-				     alert( "Data Saved: " + msg );
+					  var  Otip=$("#user_profile_tip"); 
+					  Otip.html(msg);   //填写里面的内容  
 				   }
 				});
 			}
