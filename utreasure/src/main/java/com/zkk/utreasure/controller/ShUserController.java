@@ -3,6 +3,8 @@ package com.zkk.utreasure.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,9 +13,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zkk.utreasure.common.Constant;
+import com.zkk.utreasure.dto.LoginFrom;
 import com.zkk.utreasure.dto.RegisterUser;
 import com.zkk.utreasure.entity.ShUser;
 import com.zkk.utreasure.service.ShUserServiceI;
@@ -40,6 +45,9 @@ public class ShUserController {
 	public ModelAndView toRegister(){
 		return new ModelAndView("register");
 	}
+	
+	
+	
 	
 	
 	
@@ -121,7 +129,48 @@ public class ShUserController {
 	}
 	
 	
+	/**
+	 * 跳转到登陆界面 
+	 * @return
+	 * @since  2015-4-20 09:59:44
+	 */
+	@RequestMapping(value="/toLogin")
+	public ModelAndView toLogin(){
+		return new ModelAndView("login");
+	}
 	
+	
+	
+	/**
+	 * 登陆模块
+	 * @return
+	 * @since  2015-4-20 10:35:51
+	 */
+	@RequestMapping(value="/login")
+	public  ModelAndView userLogin(HttpSession session,@ModelAttribute("loginForm") LoginFrom loginForm){
+		
+		Map<String, Object> modle = new HashMap<String, Object>();
+		ShUser  shUser=(ShUser) session.getAttribute(Constant.USER);
+		//如果session 中存在此用户
+		if(!UtilCommon.isEmptyOrNull(shUser)){
+			//跳转到主页
+			return new ModelAndView("redirect:/toMainPage.do");
+		}
+		//如果session中不存在此用户
+		modle.put("loginkey", loginForm.getLoginKey());
+		modle.put("pwd", loginForm.getPwd());
+		
+		//如果账户为空
+		if(UtilCommon.isEmptyOrNull(modle.get("loginkey"))){
+			return new ModelAndView("login",modle);
+		}
+		//
+		shUser=shUserServicei.login(loginForm);
+		log.info(shUser.toString());
+		session.setAttribute(Constant.USER, shUser);
+		//
+		return new ModelAndView("redirect:/toMainPage.do");
+	}
 	
 	
 }

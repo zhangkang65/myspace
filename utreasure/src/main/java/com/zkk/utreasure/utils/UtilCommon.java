@@ -48,9 +48,6 @@ public class UtilCommon {
 	/**
 	 * 判断字符串是否是整数
 	 * 
-	 * @author 汤太�?
-	 * @since Aug 2, 2013
-	 * @param value
 	 * @return
 	 */
 	public static boolean isInteger(String value) {
@@ -63,11 +60,7 @@ public class UtilCommon {
 	}
 
 	/**
-	 * 判断字符串是否是浮点�?
-	 * 
-	 * @author 汤太�?
-	 * @since Aug 2, 2013
-	 * @param value
+	 * 判断字符串是否是浮点�
 	 * @return
 	 */
 	public static boolean isDouble(String value) {
@@ -83,10 +76,6 @@ public class UtilCommon {
 
 	/**
 	 * 判断字符串是否是数字
-	 * 
-	 * @author 汤太�?
-	 * @since Aug 2, 2013
-	 * @param value
 	 * @return
 	 */
 	public static boolean isNumber(String value) {
@@ -95,10 +84,6 @@ public class UtilCommon {
 
 	/**
 	 * 判断是否为空
-	 * 
-	 * @author 汤太�?
-	 * @since Jul 22, 2013
-	 * @param o
 	 * @return
 	 */
 	public static boolean isEmptyOrNull(Object o) {
@@ -109,8 +94,7 @@ public class UtilCommon {
 			return true;
 		} else if (o.getClass().isArray() && Array.getLength(o) == 0) {
 			return true;
-		} else if (o instanceof Collection<?>
-				&& ((Collection<?>) o).size() == 0) {
+		} else if (o instanceof Collection<?>&& ((Collection<?>) o).size() == 0) {
 			return true;
 		} else if (o instanceof Map<?, ?> && ((Map<?, ?>) o).isEmpty()) {
 			return true;
@@ -119,59 +103,11 @@ public class UtilCommon {
 		}
 	}
 	
-	/**
-	 * 判断集合的每个元素是不是空的(Array，Collection，Map)
-	 * @param o
-	 * @return
-	 * @author 汤太�?
-	 * @since 2014-1-25 下午10:35:13
-	 */
-	public static boolean isEleOfCollectionAllEmpty(Object o) {
-		if(o.getClass().isArray()) {
-			if(Array.getLength(o) == 0) {
-				return true;
-			}
-			boolean flag = true;
-			Object[] array = (Object[])o;
-			for(Object elem:array) {
-				flag&=isEmptyOrNull(elem);
-			}
-			return flag;
-		}
-		if(o instanceof Collection<?>) {
-			Collection<?> collection = (Collection<?>) o;
-			if(collection.size() == 0) {
-				return true;
-			}
-			boolean flag = true;
-			for(Object elem:collection ) {
-				flag&=isEmptyOrNull(elem);
-			}
-			return flag;
-		}
-		if(o instanceof Map<?, ?>) {
-			Map<?, ?> map = (Map<?, ?>) o;
-			if(map.isEmpty()||map.keySet().isEmpty()) {
-				return true;
-			}
-			boolean flag = true;
-			Set<?> key = map.keySet();
-	        for (Iterator<?> it = key.iterator(); it.hasNext();) {
-	            Object elem = (Object) map.get(it.next());
-	            flag&=isEmptyOrNull(elem);
-	        }
-			return flag;
-		}
-		return false;
-	}
-	
+
 
 	/**
 	 * 判断是否为空或为零或为false
 	 * 
-	 * @author 汤太�?
-	 * @since Jul 22, 2013
-	 * @param o
 	 * @return
 	 */
 	public static boolean isEmptyOrNullOr0OrFalse(Object o) {
@@ -194,16 +130,11 @@ public class UtilCommon {
 		return !isEmptyOrNullOr0OrFalse(o);
 	}
 	
-	public static boolean isEleOfCollectionNotAllEmpty(Object o) {
-		return !isEleOfCollectionAllEmpty(o);
-	}
+
 
 	/**
 	 * 通过set来打乱list的顺序，不过会会导致重复数据丢失
 	 * 
-	 * @author 汤太�?
-	 * @since Sep 2, 2013
-	 * @param list
 	 * @return
 	 */
 	public static List<Object> outOrderListBySet(List<Object> list) {
@@ -217,9 +148,6 @@ public class UtilCommon {
 	/**
 	 * 通过map来打乱list的顺序，不过会会导致重复数据丢失
 	 * 
-	 * @author 汤太�?
-	 * @since Sep 2, 2013
-	 * @param list
 	 * @return
 	 */
 	public static List<Object> outOrderListByMap(List<Object> list) {
@@ -294,8 +222,6 @@ public class UtilCommon {
 	}
 
 	/**
-	 * �?��输入的数据中是否有特殊字�?
-	 * 
 	 * @param qString
 	 *            要检查的数据
 	 * @param regx
@@ -317,10 +243,7 @@ public class UtilCommon {
 	}
 	
 	/**
-	 * 判断map里面的元素有没有空�?
-	 * @author 汤太�?
-	 * @since Jan 4, 2014
-	 * @param map
+	 * 判断map里面的元素有没有空
 	 * @return
 	 */
 	public static boolean containsEmptyValue(Map<?,?> map) {
@@ -328,9 +251,7 @@ public class UtilCommon {
 	}
 	
 	/**
-	 * 判断map里面的元素有没有空�?�?
-	 * @author 汤太�?
-	 * @since Jan 4, 2014
+	 * 判断map里面的元素有没有空
 	 * @param map
 	 * @return
 	 */
@@ -338,46 +259,4 @@ public class UtilCommon {
 		return (containsEmptyValue(map) || map.containsValue(0));
 	}
 	
-	/**
-	 * 判断map里面�?��元素都不为空�?
-	 * @author 汤太�?
-	 * @since Jan 4, 2014
-	 * @param map
-	 * @return
-	 */
-	public static boolean notContainsEmptyValue(Map<?,?> map) {
-		return !containsEmptyValue(map);
-	}
-	
-	/**
-	 * 判断map里面�?��元素都不为空值或0
-	 * @author 汤太�?
-	 * @since Jan 4, 2014
-	 * @param map
-	 * @return
-	 */
-	public static boolean notContainsEmptyOr0Value(Map<?,?> map) {
-		return !containsEmptyOr0Value(map);
-	}
-
-	public static void main(String agrs[]) {
-//		System.out.println(hasCrossScriptRisk("14?s1",null));
-//		System.out.println(hasCrossScriptRisk("14&s1",null));
-//		System.out.println(hasCrossScriptRisk("14#s1",null));
-//		System.out.println(hasCrossScriptRisk("14,s1",null));
-//		System.out.println(hasCrossScriptRisk("14汗s1",null));
-//		System.out.println(hasCrossScriptRisk("",null));
-//		System.out.println(hasCrossScriptRisk("/",null));
-		
-		String[] strs = {"",""};
-		Map<String,Object> map = new HashMap<String, Object>();
-		map.put("s", "");
-		map.put("d", "");
-		List<String> list = new ArrayList<String>();
-		list.add("");
-		list.add("");
-//		System.out.println(isEleOfCollectionAllEmpty(strs));
-		System.out.println(isEleOfCollectionAllEmpty(map));
-//		System.out.println(isEleOfCollectionAllEmpty(list));
-	}
 }

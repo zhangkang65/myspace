@@ -12,9 +12,11 @@
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel='icon' href="<%=basePath%>images/front.ico" type="image/x-ico" />
+<!-- js  css 信息 -->
+<link rel="stylesheet"  href="<%=basePath%>jquery.mobile-1.3.2/jquery.mobile-1.3.2.css">
+<script src="<%=basePath%>jquery.mobile-1.3.2/jquery-1.8.3.min.js"></script>
 <title>register</title>
 <!-- js  css 信息 -->
-<script type="text/javascript"  src="jquery.mobile-1.3.2/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
 function registerInfo(){
 	var  loginName=$("#user_profile_name").val();
@@ -36,11 +38,9 @@ function registerInfo(){
 	    }       
 }
 
-   
-//ajax 
-$(function(){
-	$("#user_profile_name").bind("blur", function(){
-		var _this=$(this);
+function  validateName(){
+		var _this=$("#user_profile_name")
+		alert("111111");
 		if(_this.val()){   //如果存在值
 			$.ajax({
 				   type: "POST",
@@ -63,7 +63,11 @@ $(function(){
 				   }
 				});
 			}
-		});
+}
+
+//ajax 
+$(function(){
+	
 })
 </script>
 <style type="text/css">
@@ -79,17 +83,19 @@ color:blue;
 </style>
 </head>
 <body>
-	<div class="boxed-group">
+	<div class="boxed-group"  data-role="page">
+		<div  data-role="header">
 		<h3>注册信息</h3>
-		<div>
-			<form accept-charset="UTF-8" action="user/doRegister.do"  method="post"  onsubmit="return  registerInfo()">
+		</div>
+		<div data-role="content" >
+			<form accept-charset="UTF-8" action="<%=basePath%>user/doRegister.do"  method="post"  onsubmit="return  registerInfo()">
 				<div>
 					<dl class="form">
 						<dt>
 							<label for="user_profile_name">登陆名</label>
 						</dt>
 						<dd>
-							<input id="user_profile_name" name="loginName" size="30" type="text" />
+							<input id="user_profile_name" onblur='validateName()' name="loginName" size="30" type="text" />
 						</dd>
 						<dd id="user_profile_tip">
 						</dd>
@@ -122,7 +128,7 @@ color:blue;
 						</dd>
 					</dl>
 					<p>
-						<button type="submit" class="btn-primary" >确认注册</button>
+						<button type="submit" class="btn-primary" data-inline="true" >确认注册</button>
 					</p>
 				</div>
 			</form>

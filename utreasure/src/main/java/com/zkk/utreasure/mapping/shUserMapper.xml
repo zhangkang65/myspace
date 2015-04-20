@@ -27,6 +27,56 @@
 
 
 
+	<sql id="dynamicWhere">
+		<where>
+			1=1
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(id)">
+				and id=#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(userName)">
+				and  userName=#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(loginName)">
+				and  loginName=#{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(sex)">
+				and  sex=#{sex,jdbcType=VARCHAR},
+			</if>
+
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(age)">
+				and  age=#{age,jdbcType=VARCHAR},
+			</if>
+
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(password)">
+				and  password=#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(createTime)">
+				and  createTime=#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(updateTime)">
+				and  updateTime=#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(icon)">
+				and  icon=#{icon,jdbcType=VARCHAR},
+			</if>
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(address)">
+				and  address=#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(identityCardId)">
+				and  identityCardId=#{identityCardId,jdbcType=VARCHAR},
+			</if>
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(telePhone)">
+				and  telePhone=#{telePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(email)">
+				and  email=#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(userType)">
+				and  userType=#{userType,jdbcType=VARCHAR},
+			</if>
+		</where>
+	</sql>
+
 	<!-- 根据名称获取对象 -->
 	<select id="getByName" parameterType="Map" resultMap="BaseResultMap">
 		select
@@ -39,6 +89,22 @@
 			loginName=#{fieldValue,jdbcType=VARCHAR}
 		</if> 
 	</select>
+	
+	<!-- 用户登陆 -->
+	<select id="findUser"  parameterType="Map" resultMap="BaseResultMap">
+		select  
+		<include refid="Base_Column_List"></include>
+		from utr_user  where
+		<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(email)">
+			email=#{email,jdbcType=VARCHAR}  or 
+		</if>
+		<if test="@com.zkk.utreasure.utils.UtilCommon@isNotEmptyOrNull(telePhone)">
+			telePhone=#{telePhone,jdbcType=VARCHAR}  or
+		</if> 
+		loginName=#{loginName,jdbcType=VARCHAR}
+	</select>
+	
+	
 
 
 	<!-- 插入对象 -->
@@ -142,4 +208,10 @@
 			</if>
 		</trim>
 	</insert>
+	
+	
+	
+	
+	
+	
 </mapper>

@@ -2,6 +2,7 @@ package com.zkk.utreasure.service;
 
 import javax.servlet.http.HttpSession;
 
+import com.zkk.utreasure.dto.LoginFrom;
 import com.zkk.utreasure.entity.ShUser;
 
 
@@ -13,5 +14,7 @@ public interface ShUserServiceI {
 	ShUser validateRepeatName(String loginName, String loginName2);
 
 	boolean sendEmail(String email, HttpSession session);
+
+	ShUser login(LoginFrom loginForm);
 	
 }

@@ -3,6 +3,7 @@ package com.zkk.utreasure.service.impl;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -12,11 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zkk.utreasure.dao.ShUserMapper;
+import com.zkk.utreasure.dto.LoginFrom;
 import com.zkk.utreasure.entity.ShUser;
 import com.zkk.utreasure.mail.MailSenderInfo;
 import com.zkk.utreasure.mail.SimpleMailSender;
 import com.zkk.utreasure.service.ShUserServiceI;
 import com.zkk.utreasure.service.basic.BaseServiceImpl;
+import com.zkk.utreasure.utils.UtilCommon;
 
 @Service
 public class ShUserServiceImpl extends  BaseServiceImpl<ShUser> implements ShUserServiceI {
@@ -43,12 +46,13 @@ public class ShUserServiceImpl extends  BaseServiceImpl<ShUser> implements ShUse
 	}
 
 
-
+	/**
+	 * 发送邮件
+	 */
 	public boolean sendEmail(String email, HttpSession session) {
 
 		Map<String, Object> model = new HashMap<String, Object>();
 		session.setAttribute("email", email);
-		ShUser user =this.getUserByEmail(session.getAttribute("email").toString());
 		if(false){
 			model.put("message", "邮箱不存在");
 		}
@@ -65,7 +69,6 @@ public class ShUserServiceImpl extends  BaseServiceImpl<ShUser> implements ShUse
 		mailInfo.setContent("欢迎注册您的用户名是：888888，密码是：888888");
 		// 这个类主要来发送邮件
 		SimpleMailSender sms = new SimpleMailSender();
-		sms.sendTextMail(mailInfo);// 发送文体格式
 		sms.sendHtmlMail(mailInfo);// 发送html格式
 		model.put("email", email);
 		}
@@ -73,7 +76,39 @@ public class ShUserServiceImpl extends  BaseServiceImpl<ShUser> implements ShUse
 	}
 
 		
-		private ShUser getUserByEmail(String email) {
+
+		/**
+		 * 登陆
+		 */
+		public ShUser login(LoginFrom loginForm) {
+		String	loginName="";
+		String	email="";
+		String	telePhone="";
+		String  password=UtilCommon.md5Encryption(loginForm.getPwd());   
+		
+		//
+		Map<String,Object> params = new HashMap<String,Object>();
+		if(UtilCommon.isNotEmptyOrNull(password)){
+			params.put("password", password);
+			if(UtilCommon.isEmail(loginForm.getLoginKey())){
+				email=loginForm.getLoginKey();
+				params.put("email", email);
+			}else if(UtilCommon.isMobileNO(loginForm.getLoginKey())){
+				telePhone=loginForm.getLoginKey();
+				params.put("telePhone", telePhone);
+			}
+			//	
+			params.put("loginName", loginForm.getLoginKey());
+			//
+			
+		}else{
+			return  null;
+ 		}
+		
+		List<ShUser>  shUsers=shUserMapper.findUser(params);
+		if(!UtilCommon.isEmptyOrNull(shUsers)){
+			return shUsers.get(0);
+		}
 			
 			return null;
 		}
