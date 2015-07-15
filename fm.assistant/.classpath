@@ -84,7 +84,7 @@
 	<classpathentry kind="lib" path="web/lib/json-lib-2.2.3-jdk13.jar"/>
 	<classpathentry kind="lib" path="web/lib/jspSmart.jar"/>
 	<classpathentry kind="lib" path="web/lib/jta.jar"/>
-	<classpathentry kind="lib" path="web/lib/jxl.jar"/>
+	<classpathentry kind="lib" path="web/lib/jxl.jar" sourcepath="E:/maven/源码/v6"/>
 	<classpathentry kind="lib" path="web/lib/kahadb-5.4.0.jar"/>
 	<classpathentry kind="lib" path="web/lib/log.jar"/>
 	<classpathentry kind="lib" path="web/lib/log4j-1.2.15.jar"/>
@@ -185,7 +185,7 @@
 	<classpathentry kind="lib" path="web/lib/sm-toptea.auc.jar"/>
 	<classpathentry kind="lib" path="web/lib/sm-toptea.auc.ui.jar"/>
 	<classpathentry kind="lib" path="web/lib/sm-toptea.code.jar"/>
-	<classpathentry kind="lib" path="web/lib/sm-toptea.common.jar"/>
+	<classpathentry kind="lib" path="web/lib/sm-toptea.common.jar" sourcepath="E:/maven/源码/v6"/>
 	<classpathentry kind="lib" path="web/lib/sm-toptea.message.jar"/>
 	<classpathentry kind="lib" path="web/lib/sm-toptea.realtime.jar"/>
 	<classpathentry kind="lib" path="web/lib/sm-toptea.userview.chart.jar"/>

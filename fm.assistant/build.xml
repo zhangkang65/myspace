@@ -12,7 +12,7 @@
 	<target name="deploy" depends="N10004" >
 		<echo>copy jar</echo>
 	
-		<copy todir="D:\\tomcat_toptea\\webapps\\sysmgr\\WEB-INF\\lib\\">
+		<copy todir="D:\\">
 			<fileset dir="build">
 				<include name="**" />
 			</fileset>
